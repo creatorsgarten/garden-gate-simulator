@@ -1,0 +1,15 @@
+services:
+  gate:
+    image: ghcr.io/creatorsgarten/garden-gate
+    volumes:
+      - ./config.json:/app/config.json:ro
+      - ./data:/app/.data
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:9901:3000
+  simulator:
+    image: ghcr.io/creatorsgarten/garden-gate
+    command: ["./bun", "src/simulator.ts"]
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:9902:3331
